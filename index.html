@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Vijay &amp; Rashmika | Wedding Invitation</title>
+<meta name="description" content="You're invited to the wedding of Vijay Deverakonda &amp; Rashmika Mandanna — 7 February 2027, Muhurtham 10:15 AM, Hyderabad." />
+<meta name="theme-color" content="#6b1d2a" />
+<meta property="og:title" content="Vijay &amp; Rashmika — Wedding Invitation" />
+<meta property="og:description" content="7 February 2027 • Muhurtham 10:15 AM • Hyderabad" />
+<meta property="og:type" content="website" />
+
+<!-- Favicon (inline so no extra file needed) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128402;</text></svg>" />
+
+<!-- All libraries are self-hosted in /vendor so the invitation works offline
+     (important: double-clicking index.html must never depend on internet) -->
+
+<!-- Bootstrap 5 -->
+<link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+<!-- Bootstrap Icons -->
+<link href="vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+<!-- Fonts (self-hosted): Cinzel, Figtree, Fraunces, Fleur De Leah, Anek Telugu -->
+<link href="vendor/fonts/fonts.css" rel="stylesheet" />
+<!-- AOS scroll animations -->
+<link href="vendor/aos/aos.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ======================= INVITATION GATE ======================= -->
+<div class="gate" id="gate">
+  <div class="gate-panel text-center" data-aos="zoom-in">
+    <div class="gate-mood mx-auto">
+      <img id="gateImg" alt="" />
+    </div>
+    <h1 class="gate-title" id="gateTitle"></h1>
+    <p class="gate-telugu" id="gateTelugu"></p>
+    <p class="gate-greeting" id="gateGreeting"></p>
+    <button class="btn btn-gold btn-lg" id="enterBtn" type="button">
+      <i class="bi bi-envelope-heart me-2"></i><span id="gateBtnText">Enter Invitation</span>
+    </button>
+    <p class="gate-note"><i class="bi bi-music-note-beamed me-1"></i>Music plays when you enter · tap the speaker to mute</p>
+  </div>
+</div>
+
+<!-- ======================= BLESSINGS ANIMATION ======================= -->
+<div class="bless-stage" id="blessStage" aria-hidden="true">
+  <div class="bless-stack">
+    <div class="bless-fly" data-b="0">|| శ్రీ రస్తు ||</div>
+    <div class="bless-fly" data-b="1">|| శుభమస్తు ||</div>
+    <div class="bless-fly" data-b="2">|| అవిఘ్నమస్తు ||</div>
+  </div>
+</div>
+<div class="bless-bar" id="blessBar" aria-hidden="true">
+  <span data-b="0">|| శ్రీ రస్తు ||</span>
+  <span data-b="1">|| శుభమస్తు ||</span>
+  <span data-b="2">|| అవిఘ్నమస్తు ||</span>
+</div>
+
+<!-- floating petals canvas + mute -->
+<canvas id="petals" aria-hidden="true"></canvas>
+<button class="float-btn" id="muteBtn" type="button" aria-label="Toggle music"><i class="bi bi-volume-up-fill"></i></button>
+
+<!-- ======================= NAVBAR ======================= -->
+<nav class="navbar navbar-expand-md fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand brand-script" href="#hero" id="navBrand"></a>
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Menu">
+      <i class="bi bi-list fs-3"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#couple">Couple</a></li>
+        <li class="nav-item"><a class="nav-link" href="#when">When &amp; Where</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#family">Family</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero" id="hero">
+  <div class="hero-media" id="heroMedia">
+    <div class="hero-pattern" aria-hidden="true"></div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <div class="hero-content container text-center">
+    <p class="hero-brand" data-aos="fade-up" data-aos-delay="150" id="heroBrand"></p>
+
+    <h1 class="hero-names">
+      <span class="name-line d-block" data-aos="fade-up" data-aos-delay="250" id="heroGroom"></span>
+      <span class="name-line d-block" data-aos="fade-up" data-aos-delay="350" id="heroBride"></span>
+    </h1>
+
+    <p class="hero-meta" data-aos="fade-up" data-aos-delay="450">
+      <span id="heroDate"></span> <span class="dot">·</span> <span id="heroMuhurtham"></span>
+    </p>
+
+    <div class="countdown row g-2 justify-content-center" data-aos="fade-up" data-aos-delay="550">
+      <div class="col-3 col-sm-2"><div class="cd-unit"><span id="cdDays">00</span><small>Days</small></div></div>
+      <div class="col-3 col-sm-2"><div class="cd-unit"><span id="cdHours">00</span><small>Hrs</small></div></div>
+      <div class="col-3 col-sm-2"><div class="cd-unit"><span id="cdMins">00</span><small>Min</small></div></div>
+      <div class="col-3 col-sm-2"><div class="cd-unit"><span id="cdSecs">00</span><small>Sec</small></div></div>
+    </div>
+
+    <div data-aos="fade-up" data-aos-delay="650">
+      <a class="btn btn-cream" id="saveBtn" href="#" target="_blank" rel="noopener">
+        <i class="bi bi-calendar-plus me-2"></i>Save the Date
+      </a>
+    </div>
+  </div>
+
+  <a class="hero-scroll" href="#couple" aria-label="Scroll to couple"><i class="bi bi-chevron-double-down"></i></a>
+</header>
+
+<main>
+
+<!-- ======================= COUPLE ======================= -->
+<section class="section-pad" id="couple">
+  <div class="container">
+    <header class="section-head text-center" data-aos="fade-up">
+      <p class="kicker">The Couple</p>
+      <h2 class="section-title">Bride &amp; Groom</h2>
+      <p class="section-lead">With Lord Ganesh's blessings &amp; our elders' love</p>
+    </header>
+    <div class="row g-4 justify-content-center" id="coupleRow"><!-- injected by JS --></div>
+  </div>
+</section>
+
+<div class="ornament"><span></span></div>
+
+<!-- ======================= WHEN & WHERE ======================= -->
+<section class="section-pad" id="when">
+  <div class="container">
+    <header class="section-head text-center" data-aos="fade-up">
+      <p class="kicker">Celebrations</p>
+      <h2 class="section-title">When &amp; Where</h2>
+      <p class="section-lead">Wedding &amp; Reception — Hyderabad</p>
+    </header>
+
+    <div class="row g-4 justify-content-center mb-5" id="celebrationRow"><!-- injected --></div>
+
+    <div class="row g-4 justify-content-center" id="timelineRow"><!-- injected --></div>
+
+    <header class="text-center mt-5 mb-4" data-aos="fade-up">
+      <h3 class="panel-title">Venue Details</h3>
+      <p class="section-lead">Wedding ceremony and reception at the locations below</p>
+    </header>
+
+    <div class="row g-4 justify-content-center" id="venueRow"><!-- injected --></div>
+  </div>
+</section>
+
+<div class="ornament"><span></span></div>
+
+<!-- ======================= GALLERY ======================= -->
+<section class="section-pad" id="gallery">
+  <div class="container">
+    <header class="section-head text-center" data-aos="fade-up">
+      <p class="kicker">Moments</p>
+      <h2 class="section-title">The Gallery</h2>
+    </header>
+
+    <div id="galleryCarousel" class="carousel slide gallery-carousel" data-bs-ride="carousel" data-bs-interval="6000" data-aos="zoom-in">
+      <div class="carousel-inner" id="galleryInner"><!-- injected --></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev" aria-label="Previous">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="carousel-btn next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next" aria-label="Next">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament"><span></span></div>
+
+<!-- ======================= FAMILY ======================= -->
+<section class="section-pad" id="family">
+  <div class="container">
+    <header class="section-head text-center" data-aos="fade-up">
+      <p class="kicker">With Gratitude</p>
+      <h2 class="section-title">Invitation from Our Families</h2>
+    </header>
+    <div class="row g-4 justify-content-center" id="familyRow"><!-- injected --></div>
+    <div class="gratitude text-center mx-auto" data-aos="fade-up" id="gratitude"><!-- injected --></div>
+  </div>
+</section>
+
+<div class="ornament"><span></span></div>
+
+<!-- ======================= CONTACT ======================= -->
+<section class="section-pad pb-5" id="contact">
+  <div class="container">
+    <header class="section-head text-center" data-aos="fade-up">
+      <p class="kicker">Reach Us</p>
+      <h2 class="section-title">Contact</h2>
+    </header>
+    <div class="row g-4 justify-content-center" id="contactRow"><!-- injected --></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="site-footer text-center">
+  <p class="mb-0" id="footerNote"></p>
+</footer>
+
+<!-- ======================= LIGHTBOX ======================= -->
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+  <img id="lightboxImg" alt="" />
+</div>
+
+<!-- Self-hosted JS. aos.js MUST load before main.js, otherwise every
+     [data-aos] element stays at opacity:0 and the page looks blank. -->
+<script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="vendor/aos/aos.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
